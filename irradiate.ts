@@ -22,25 +22,31 @@ const targetFile = Bun.file(targetPath);
 const originalText = await targetFile.text();
 
 const SCRATCHPAD_FILE = "temp.ts";
+let passes = 0;
+let fails = 0;
+let skips = 0;
+
 for(let i = 0; i < originalText.length; i++){
     const mutant = originalText.substring(0, i) + originalText.substring(i + 1, originalText.length);
+    const mutantLabeled = originalText.substring(0, i) +"[MUTATION HERE]"+ originalText.substring(i + 1, originalText.length);
     await Bun.write(SCRATCHPAD_FILE, mutant, {
         createPath: true
     });
     const result = await execPromise(`bun run ${SCRATCHPAD_FILE}`)
-    let passes = 0;
-    let fails = 0;
     if(result.error === 0){
         if(result.stdout === originalText){
             passes++;
-            console.log(mutant);
-            console.log("=======================================================");
         } else {
+            console.log("MUTANT FAIL =================")
+            console.log(mutantLabeled);
+            console.log("RESULT =================")
+            console.log(result.stdout);
             fails++;
         }
+    } else {
+        skips++;
     }
-    console.log(passes, fails);
 }
-
+console.log(passes, fails, skips);
 
 

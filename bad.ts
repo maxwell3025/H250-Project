@@ -26,7 +26,7 @@ validate();
 console.log(replace(data, change(data)))
 `
 function change(str: string){
-    return str.replaceAll("\\", "\\\\").replaceAll("`", "\\`");
+    return str.replaceAll("\\", "\\\\").replaceAll("", "\\`");
 }
 function replace(str: string, infix: string){
     for(let i = 0; i < str.length; i++){
@@ -48,3 +48,4 @@ function validate(){
 }
 validate();
 console.log(replace(data, change(data)))
+
