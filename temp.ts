@@ -1,5 +1,17 @@
-//HASH: aaaaaaaaaaaaaaaaaaaez
-const data = `//HASH: aaaaaaaaaaaaaaaaaaaez
+/*
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaakzzzzzzzzzz
+*/
+const data = `/*
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaakzzzzzzzzzz
+*/
 const data = \`ax\`
 const aStr = "\\\\";
 const bStr = "\\\\\\\\";
@@ -17,17 +29,18 @@ function replace(str: string, infix: string){
             return str.slice(0, i) + infix + str.slice(i + 2)
         }
     }
+    return "";
 }
-function validate(){
+function validate(result: string){
     let hash = 0;
-    (data+aStr+bStr+cStr+dStr).split("").forEach(char => {
+    (result+data+aStr+bStr+cStr+dStr).split("").forEach(char => {
         hash = hash + char.charCodeAt(0);
     })
-    if(hash != 0xd800)
+    if(hash != 0x30001)
         process.exit(1);
+    return result;
 }
-validate();
-console.log(replace(data, change(data)))
+console.log(validate(replace(data, change(data))))
 `
 const aStr = "\\";
 const bStr = "\\\\";
@@ -45,14 +58,15 @@ function replace(str: string, infix: string){
             return str.slice(0, i) + infix + str.slice(i + 2)
         }
     }
+    return "";
 }
-function validate(){
+function validate(result: string){
     let hash = 0;
-    (data+aStr+bStr+cStr+dStr).split("").forEach(char => {
+    (result+data+aStr+bStr+cStr+dStr).split("").forEach(char => {
         hash = hash + char.charCodeAt(0);
     })
-    if(hash != 0xd800)
+    if(hash != 0x30001)
         process.exit(1);
+    return result;
 }
-validate();
-console.log(replace(data, change(data)))
+console.log(validate(replace(data, change(data))))
