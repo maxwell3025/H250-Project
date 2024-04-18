@@ -1,8 +1,12 @@
-//HASH: aawaabZ
-const data = `//HASH: aawaabZ
+//HASH: aaaaaaaaaaaaaaaaaaaez
+const data = `//HASH: aaaaaaaaaaaaaaaaaaaez
 const data = \`ax\`
+const aStr = "\\\\";
+const bStr = "\\\\\\\\";
+const cStr = "\`";
+const dStr = "\\\\\`";
 function change(str: string){
-    return str.replaceAll("\\\\", "\\\\\\\\").replaceAll("\`", "\\\\\`");
+    return str.replaceAll(aStr, bStr).replaceAll(cStr, dStr);
 }
 function replace(str: string, infix: string){
     for(let i = 0; i < str.length; i++){
@@ -16,17 +20,21 @@ function replace(str: string, infix: string){
 }
 function validate(){
     let hash = 0;
-    data.split("").forEach(char => {
+    (data+aStr+bStr+cStr+dStr).split("").forEach(char => {
         hash = hash + char.charCodeAt(0);
     })
-    if(hash != 0xb000)
+    if(hash != 0xd800)
         process.exit(1);
 }
 validate();
 console.log(replace(data, change(data)))
 `
+const aStr = "\\";
+const bStr = "\\\\";
+const cStr = "`";
+const dStr = "\\`";
 function change(str: string){
-    return str.replaceAll("\\", "\\\\").replaceAll("`", "\\`");
+    return str.replaceAll(aStr, bStr).replaceAll(cStr, dStr);
 }
 function replace(str: string, infix: string){
     for(let i = 0; i < str.length; i++){
@@ -40,10 +48,10 @@ function replace(str: string, infix: string){
 }
 function validate(){
     let hash = 0;
-    data.split("").forEach(char => {
+    (data+aStr+bStr+cStr+dStr).split("").forEach(char => {
         hash = hash + char.charCodeAt(0);
     })
-    if(hash != 0xb000)
+    if(hash != 0xd800)
         process.exit(1);
 }
 validate();
