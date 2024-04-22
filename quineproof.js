@@ -1,33 +1,23 @@
 import evalSafe from "./evalSafe.js";
 
-/**
- * Encodes a string as a bigint.
- * @param {string} str 
- * @returns {bigint}
- */
 const encode = (str) => {
     let output = 1n;
     for(let i = 0; i < str.length; i++){
         output = output << 8n;
-        output += BigInt(str.charCodeAt(i));
+        output = output | BigInt(str.charCodeAt(i));
     }
     return output;
 };
 
-/**
- * Decodes a string from a bigint.
- * @param {bigint} code 
- * @returns {str}
- */
 const decode = (code) => {
-    let output = "";
+    let output = [];
     while(code >= 256n){
-        const currentCharCode = Number(code % 256n);
+        const currentCharCode = Number(code & 255n);
         const char = String.fromCharCode(currentCharCode);
-        output = `${char}${output}`;
+        output.push(char);
         code = code >> 8n;
     }
-    return output;
+    return output.toReversed().join("");
 };
 
 /**
@@ -45,7 +35,7 @@ ${executedString}
 }
 
 // EXPORTS
-const dependency_string = "/**\n * Encodes a string as a bigint.\n * @param {string} str \n * @returns {bigint}\n */\nconst encode = (str) => {\n    let output = 1n;\n    for(let i = 0; i < str.length; i++){\n        output = output << 8n;\n        output += BigInt(str.charCodeAt(i));\n    }\n    return output;\n};\n\n/**\n * Decodes a string from a bigint.\n * @param {bigint} code \n * @returns {str}\n */\nconst decode = (code) => {\n    let output = \"\";\n    while(code >= 256n){\n        const currentCharCode = Number(code % 256n);\n        const char = String.fromCharCode(currentCharCode);\n        output = `${char}${output}`;\n        code = code >> 8n;\n    }\n    return output;\n};\n"
+const dependency_string = "const encode = (str) => {\n    let output = 1n;\n    for(let i = 0; i < str.length; i++){\n        output = output << 8n;\n        output = output | BigInt(str.charCodeAt(i));\n    }\n    return output;\n};\n\nconst decode = (code) => {\n    let output = [];\n    while(code >= 256n){\n        const currentCharCode = Number(code \& 255n);\n        const char = String.fromCharCode(currentCharCode);\n        output.push(char);\n        code = code >> 8n;\n    }\n    return output.toReversed().join(\"\");\n};";
 export {
     encode,
     decode,
@@ -100,15 +90,17 @@ export const s_function = (n, x) => {
 export const s = encode("(n, x) => {"+dependency_string+"\n    return encode(`(...x) => ((${decode(n)})(${x}n, ...x))`)\n}");
 
 const iden = encode("(x => x)");
-export const h = encode(`x => (${decode(u)})(${s}n, ${iden}n, x)`)
-// x => s((c), x)
-// x => u(s, (console.log), x)
+export const h = encode(`x => (${decode(s)})(${iden}n, x)`)
 
+const a = 412342315n;
+const ret_a = phi(s)(s, a);
+
+/**
+ * This is the encoding of (t, ...x) => ((h)((s)(t, t)))(...x)
+ */
 export const m = encode(`(t, ...x) => (${decode(u)})(
-    (${decode(u)})(
-        ${h}n,
-        (${decode(u)})(
-            ${s}n,
+    (${decode(h)})(
+        (${decode(s)})(
             t,
             t
         )
@@ -116,6 +108,26 @@ export const m = encode(`(t, ...x) => (${decode(u)})(
     ...x
 )`);
 
+/**
+ * This is the encoding of (t, ...x) => s(t, t)
+ */
+export const v_1 = phi(s)(s, s)
+// ...x => s(s, ...x) = (...y) => s(x, ...y)
+// (s(s, s))(t, ...x) = 
+// (...y => s(s, ...y))(t, ...x) =
+// s(s, t, ...x) =
+// (...y) => s(t, ...y)
+export const v_2 = phi(s)(s, s)
+// 
+
+
 const fixed_point = phi(s)(m, m);
 console.log(fixed_point - phi(fixed_point)())
-// ??how is this not an infinite loop??
+/*
+This is the evaluation order
+s(m, m)() =
+m(m)() =
+h(s(m, m))() =
+(() => s(m, m))() =
+s(m, m)
+*/
