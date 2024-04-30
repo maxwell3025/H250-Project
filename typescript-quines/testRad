@@ -1,0 +1,3 @@
+#!/bin/bash
+bun typescript-quines/irradiate.ts > typescript-quines/latest.log
+tail -n 1 typescript-quines/latest.log

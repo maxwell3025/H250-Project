@@ -1,0 +1,4 @@
+#!/bin/bash
+. .env
+bun $TARGET > typescript-quines/temp.ts
+diff $TARGET typescript-quines/temp.ts

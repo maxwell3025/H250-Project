@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1714430217 "/home/max/Repositories/H250-Project/writeup/writeup.tex" "writeup.pdf" "writeup" 1714430218
+["pdflatex"] 1714495247 "/home/max/Repositories/H250-Project/writeup/writeup.tex" "writeup.pdf" "writeup" 1714495247
   "/etc/texmf/web2c/texmf.cnf" 1708624864 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/max/Repositories/H250-Project/writeup/writeup.tex" 1714430217 2561 82bddbf4f4ee73fa374f70e49a312c1d ""
+  "/home/max/Repositories/H250-Project/writeup/writeup.tex" 1714495246 5763 71aadedb8d3cc91682c84fac1a6f7956 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrb7t.tfm" 1136768653 960 4ab65358b8406f30ef5496c8c096d22b ""
@@ -30,6 +30,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti10.tfm" 1136768653 1480 aa8e34af0eb6a2941b776984cf1dfdc4 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1248133631 34811 78b52f49e893bcba91bd7581cdc144c0 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb" 1248133631 32001 6aeea3afe875097b1eb0da29acd61e28 ""
@@ -40,6 +41,7 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1248133631 32362 179c33bbf43f19adbb3825bb4e36e57a ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1248133631 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1248133631 37944 359e864bd06cde3b1cf57bb20757fb06 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb" 1136849748 50493 4ed1f7e9eba8f1f3e1ec25195460190d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb" 1136849748 45758 19968a0990191524e34e1994d4a31cb6 ""
   "/usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrb7t.vf" 1136768653 1344 c590fc3b8640445e169e64e330afb3d5 ""
@@ -156,10 +158,11 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1710176327 4379155 98693266ff65f58d9f98aff394de12d2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1710176367 2800939 0edf4a71387bbeaba34328fda393bd41 ""
+  "SEQuine.js" 1714436626 927 3c8246481a7b8e81e79d76ade01fd651 ""
   "example-code.c" 1713378559 117 e3b2959606a0bc0a3621bfb0d4479284 ""
   "example-figure.pdf" 1713378559 5150 e42179cb6b4cab2c806b969672bab09f ""
-  "writeup.aux" 1714430218 461 3d1b6a3f9fbbcfbbc69733c1ac283d7c "pdflatex"
-  "writeup.tex" 1714430217 2561 82bddbf4f4ee73fa374f70e49a312c1d ""
+  "writeup.aux" 1714495247 461 d57a9b55a721422c63a05b86ff7c5e61 "pdflatex"
+  "writeup.tex" 1714495246 5763 71aadedb8d3cc91682c84fac1a6f7956 ""
   (generated)
   "writeup.aux"
   "writeup.log"

@@ -1,3 +1,0 @@
-#!/bin/bash
-bun irradiate.ts > latest.log
-tail -n 1 latest.log

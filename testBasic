@@ -1,4 +1,0 @@
-#!/bin/bash
-. .env
-bun $TARGET > temp.ts
-diff $TARGET temp.ts

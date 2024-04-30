@@ -17,11 +17,14 @@ async function execPromise(cmd: string): Promise<{
 };
 
 const targetPath = process.env.TARGET ?? "quine.ts";
+if(!process.env.TEMP_FILE){
+    console.warn("No TEMP_FILE defined in .env");
+    process.exit(1);
+}
 const targetFile = Bun.file(targetPath);
 
 const originalText = await targetFile.text();
 
-const SCRATCHPAD_FILE = "temp.ts";
 let passes = 0;
 let fails = 0;
 let skips = 0;
@@ -29,10 +32,10 @@ let skips = 0;
 for(let i = 0; i < originalText.length; i++){
     const mutant = originalText.substring(0, i) + originalText.substring(i + 1, originalText.length);
     const mutantLabeled = originalText.substring(0, i) +"[MUTATION HERE]"+ originalText.substring(i + 1, originalText.length);
-    await Bun.write(SCRATCHPAD_FILE, mutant, {
+    await Bun.write(process.env.TEMP_FILE!, mutant, {
         createPath: true
     });
-    const result = await execPromise(`bun run ${SCRATCHPAD_FILE}`)
+    const result = await execPromise(`bun run ${process.env.TEMP_FILE!}`)
     if(result.error === 0){
         if(result.stdout === originalText){
             passes++;
