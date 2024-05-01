@@ -47,6 +47,8 @@ for(let i = 0; i < originalText.length; i++){
             fails++;
         }
     } else {
+        console.log("================= SKIPPED =================")
+        console.log(mutantLabeled);
         skips++;
     }
 }
