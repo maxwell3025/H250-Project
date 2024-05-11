@@ -1,0 +1,15 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'writeup.blg'
+[73] biber:340> INFO - === Fri May 10, 2024, 21:52:51
+[86] Biber.pm:418> INFO - Reading 'writeup.bcf'
+[141] Biber.pm:972> INFO - Found 2 citekeys in bib section 0
+[152] Biber.pm:4383> INFO - Processing section 0
+[161] Biber.pm:4574> INFO - Looking for bibtex file 'citations.bib' for section 0
+[161] bibtex.pm:1713> INFO - LaTeX decoding ...
+[164] bibtex.pm:1518> INFO - Found BibTeX data source 'citations.bib'
+[198] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[199] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[199] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[199] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[205] bbl.pm:654> INFO - Writing 'writeup.bbl' with encoding 'UTF-8'
+[207] bbl.pm:757> INFO - Output to writeup.bbl

@@ -5,6 +5,12 @@
 \usepackage{amssymb}
 \usepackage{listings}
 \usepackage{color}
+\usepackage[
+backend=biber,
+style=alphabetic,
+]{biblatex}
+
+\addbibresource{citations.bib} %Imports bibliography file
 
 \renewcommand{\ttdefault}{pcr}
 \lstset{ 
@@ -41,98 +47,118 @@
   stringstyle=\color{red}\ttfamily,
   sensitive=true
 }
+\lstdefinelanguage{TypeScript}{
+  keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  morestring=[b]`,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  sensitive=true
+}
 
 \title{Crazy Quines}
 \author{Maxwell Tang}
-\date{Due 10 May 2024}
+\date{Due 11 May 2024}
 
 \begin{document}
 \maketitle
-Okay, so we've just received our first message from the great unknown,
-    and it looks like the strangers from another world have another world have something to share with us!
+\noindent\textit{
+Note: This writeup doesn't nessecarily cover everything I did for this project.
+Rather, it just ties the highlights into a single narrative.
+The source code containing everything I did for this project is at
+}\\
+\verb|https://github.com/maxwell3025/H250-Project|
+
+\bigbreak
+
+\noindent Okay, so we've just received our first message from the great unknown,
+    and it looks like the strangers from another world have something to share with us!
 After decoding the message we wait to see what it is. \vspace*{0.25cm}
 \\Maybe it's a polynomial time solution for 3-SAT.
 \\Maybe it's a proof of the Goldbach conjecture.
 \\Maybe it's a computer virus that destroys our planet.
 \bigbreak
-It's a TypeScript interpreter.
+\noindent It's a TypeScript interpreter \textellipsis
 \bigbreak
-Well this is certainly unexpected, but regardless, we still need to come up with a response.
-If first encounters here on earth have taught us anything,
-    then we should realize that they're probably not just looking for friends,
-    so it would be prudent to show that we're not just an empty planet full of free resources.
+\noindent While we could sit around and ponder the implications of this,
+    it would be rude to leave the aliens on waiting for a response.
 
-To do this, we can send a computer program back to them,
+To show off our intelligence, we can send a computer program back to them,
     and since they sent us a Typescript runtime,
     it would be natural to send a Typescript program back.
-We don't know what kinds of programs would be interesting to them,
-    but quines seem like a good candidate for a "universally interesting" program.
+In addition, we should try to send something that they find interesting,
+    which is a much harder task than it initially seems.
+For example,
+    they might not reason using the same mathematical framework we do,
+    and they probably don't have a use for tools that are useful to us,
+    and they definitely don't know English or any other languages from earth.
+However, they \textit{did} send us a Typescript runtime,
+    so we can be reasonably sure that they understand computer science,
+    which means that a program that's interesting computationally would probably be interesting to them too.
+Perhaps we send them a quine!
 
+\subsection*{Quine in Typescript}
+Mathematicians here on Earth have proved that we can create quines in any programming language\cite{madore-quines},
+    so we have a starting point for creating our message.
+If we follow the schema of starting with a template for the source code,
+    followed by code for decoding that source code,
+    then we can pretty easily create a quine!
+
+\lstinputlisting[language=TypeScript]{../typescript-quines/shortenedQuine.ts}
+
+\subsection*{Radiation-Hardened Quine in Typescript}
 The problem is, though, that these guys are thousands of light-years away!
 There's no way that our signal is getting to them intact.
 What we need is a quine that can survive being corrupted.
-In particular, a quine that prints its original output after a single character deletion would be a good starting point.
-With a goal in mind, let's start working on it!
+As a start, we can try to create a "radiation-hardened quine" --- a quine that prints out its intact source code after any single character deletion.
 
-\subsection*{Existing Radiation-Proof Quines}
-To begin, it makes sense to look at existing samples of radiation-proof quines in other languages.
-In particular, an example from the Code Golf Stack Exchange is relatively easy to understand.
-\lstinputlisting[language=JavaScript]{SEQuine.js}
-As explained in the post, the script begins with a "guard statement" that accounts for typos created by the irradiation process.
-This effectively "disables" any typos, and also absorbs any changes within itself.
-Getting this part to work correctly relies on some JavaScript-specific features, so this likely won't be of much help to us.
-The next part contains a repeated setTimeout statement, which both execute the quine-printing code.
-The key in this part is that each statement only prints the quine if a certain flag has not been set.
-This way, the second block acts as a backup incase the first block fails due to a missing character.
+\subsection*{Existing Radiation-Hardened Quines}
+To begin, it makes sense to look at an example in another language, which we can find on the Code Golf Stack Exchange\cite{se-js}.
+This script contains a few interesting moving parts that can be ported over to TypeScript.
+The most significant feature of the script is the 2 identical \verb|setTimeout| calls.
+The poster explains that \verb|setTimeout| is used to interpret code so that it exits silently when it hits an error.
+Since it is copied, at least one of the \verb|setTimeout| calls is intact, and will print the intact source code correctly.
 
-Unfortunately, because of how TypeScript works, every valid script must start with a keyword such as \verb|const|, \verb|let|, \verb|function|, etc.
+In addition, the script begins with a "guard statement" that reassigns any typos to a function that does nothing.
+This also plays a part in ensuring that the mutation doesn't break the script.
+However, getting this part to work correctly relies on unscoped declarations,
+    which don't exist in TypeScript.
+This leads us into the key issue with making a radiation-hardened quine in TypeScript.
+
+Unfortunately, every valid TypeScript program must start with a keyword such as \verb|const|, \verb|let|, \verb|function|, etc.
 Since the keywords in TypeScript are not lexically close enough to allow for clever tricks, any script can be made invalid by changing the first keyword.
 Indeed, similar reasoning shows that most languages, like C, C++, Rust, Java, etc. have keywords as their Achilles' heels.
 This, however, shouldn't lead us to lose hope.
-We can loosen our requirements and see what cen be done.
+The aliens probably understand that signals can be corrupted when traveling hundreds of light years,
+    so we just need to maximize the probability that out script will run correctly.
+Thus, we can loosen our requirements and see what can be done.
 For a start, we can still use the tricks outlined above to make our script valid under \textit{most} deletions, so that we will still probably get our message across.
-In addition, we should also make sure that the script doesn't output the wrong text. We just want it to crash if it isn't able to print itself.
-Finally, we might want to avoid manually crashing the program, since this might confuse the aliens into thinking that out quine is supposed to crash!
+In addition, we should also make sure that the script doesn't output the wrong text.
+Instead, it should just crash when it can't recover,
+    since we definitely don't want the program to mislead the aliens into thinking it's functioning correctly.
 
-To begin, we can try making a basic quine in TypeScript(See quine.ts).
-This follows the strategy listed out in David Madore's article on quines:
-It begins with a data section,
-    listing out most of the source code in the quine,
-    followed by code to translate this into the actual source code fo the quine and printing it out.
+When we run our original quine though a testing script,
+we get 77 mutants which output the wrong text, and 0 recoverable mutations.
+This is terrible!
 
-This is a good first step, but we haven't actually done any radiation-proofing to this quine.
-Indeed, when we run it through a testing script, we get 445 mutants which output the wrong text.
+Now, we can try to write a quine which recognizes any errors within itself(see \verb|typescript-quines/harderQuine.ts|).
+This uses a checksum in order to validate all of the strings in the code, and manually exits with an error if it doesn't match.
+When we test this, we get 325 mutations that are recoverable, 0 incorrect outputs, and 1382 crashes.
+This is better, but most of the mutations just skip, which doesn't bode well for our odds of getting this message successfully sending.
 
+Finally, if we use redundancy, as mentioned in the example, we can now recover from mutations, rather than just recognizing them.
+In the final script, I use three redundant copies of the data string to allow for any incorrect strings to be thrown out.
+In this final script, we get 748 recoverable mutations, and only 194 crashing mutations.
+This is a much better ratio than we got before, and this was the best I was able to do.
 
-
-
-
-
-
-
-
-
-\section*{Examples!}
-
-\subsection*{Equations}
-$$\int_{0}^{\pi}\sin x dx = 2$$
-
-\subsection*{Diagrams}
-\begin{center}
-    \includegraphics[width=0.5\textwidth]{example-figure.pdf}
-\end{center}
-
-\subsection*{Algorithms}
-\begin{algorithmic}
-    \Function{factorial}{n}
-        \State x := 1
-        \ForAll{i from 1 to n}
-            \State x := x * i
-        \EndFor
-        \State \Return x
-    \EndFunction
-\end{algorithmic}
-
-\subsection*{Code}
-\lstinputlisting[language=C]{example-code.c}
+\subsection*{Conclusion}
+With our final program ready, we can send our message out into space!
+\printbibliography
 \end{document}

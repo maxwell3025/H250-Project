@@ -52,6 +52,8 @@ for(let i = 0; i < originalText.length; i++){
         skips++;
     }
 }
-console.log(passes, fails, skips);
+console.log("passes:", passes);
+console.log("fails:", fails);
+console.log("skips:", skips);
 
 

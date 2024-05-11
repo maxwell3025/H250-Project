@@ -1,0 +1,80 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{anyt/global//global/global}
+    \entry{se-js}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=fa3e83a4fdcaffb1fdd350079f665ded}{%
+           family={jrich},
+           familyi={j\bibinitperiod}}}%
+      }
+      \strng{namehash}{fa3e83a4fdcaffb1fdd350079f665ded}
+      \strng{fullhash}{fa3e83a4fdcaffb1fdd350079f665ded}
+      \strng{bibnamehash}{fa3e83a4fdcaffb1fdd350079f665ded}
+      \strng{authorbibnamehash}{fa3e83a4fdcaffb1fdd350079f665ded}
+      \strng{authornamehash}{fa3e83a4fdcaffb1fdd350079f665ded}
+      \strng{authorfullhash}{fa3e83a4fdcaffb1fdd350079f665ded}
+      \field{labelalpha}{jri16}
+      \field{sortinit}{j}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Stack Exchange}
+      \field{title}{Javascript (ES6)}
+      \field{year}{2016}
+      \verb{urlraw}
+      \verb https://codegolf.stackexchange.com/questions/57257/radiation-hardened-quine/#answer-73753
+      \endverb
+      \verb{url}
+      \verb https://codegolf.stackexchange.com/questions/57257/radiation-hardened-quine/#answer-73753
+      \endverb
+    \endentry
+    \entry{madore-quines}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=81fd520b82c895935948ac88a6b69adb}{%
+           family={Madore},
+           familyi={M\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{81fd520b82c895935948ac88a6b69adb}
+      \strng{fullhash}{81fd520b82c895935948ac88a6b69adb}
+      \strng{bibnamehash}{81fd520b82c895935948ac88a6b69adb}
+      \strng{authorbibnamehash}{81fd520b82c895935948ac88a6b69adb}
+      \strng{authornamehash}{81fd520b82c895935948ac88a6b69adb}
+      \strng{authorfullhash}{81fd520b82c895935948ac88a6b69adb}
+      \field{labelalpha}{Mad}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Web}
+      \field{title}{Quines (self-replicating programs)}
+      \verb{urlraw}
+      \verb http://www.madore.org/~david/computers/quine.html
+      \endverb
+      \verb{url}
+      \verb http://www.madore.org/~david/computers/quine.html
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
